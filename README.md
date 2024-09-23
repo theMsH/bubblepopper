@@ -1,0 +1,20 @@
+# Tehtäväsarja 2 Miika Haapanen
+Tästä repositoriosta löytyy koodi tehtäväsarja 2 tehtäviin.
+(This repository is used in my dev studies)
+
+## Setup project
+- Install Node.js to your device https://nodejs.org/en
+
+- Clone this repository to your preferred destination.
+
+- Navigate to projectfolder in terminal or open it in Visual Studio Code's terminal
+- Install packages used in the project:
+```
+npm install
+```
+- Run the program:
+```
+npm run dev
+```
+
+Close program by pressing CTRL+C or by closing terminal

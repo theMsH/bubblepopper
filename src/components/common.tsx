@@ -19,18 +19,22 @@ export const Navigation = styled.div`
 `
 export const HomeButton = styled.button`
   margin-left: 10px;
-  background: ${theme.buttonGradient};
+  background: #ffee01;
   width: 50px;
   height: 50px;
   border: none;
   border-radius: 50%;
+  box-shadow: 0 0 25px #d0ff00;
+  border: 3px solid rgb(242, 255, 0);
 `
 export const Points = styled.div`
   width: 50px;
   height: 50px;
-  background: ${theme.buttonGradient};
+  background: #00aeff4e;
   margin-right: 10px;
   border-radius: 50%;
   text-align: center;
   align-content: center;
+  box-shadow: 0 0 25px #effdff inset;
+  border: 3px solid rgba(255, 255, 255, 0.63);
 `

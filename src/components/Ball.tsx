@@ -26,7 +26,7 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
         setY(yState-speedY)
         setX(xState+speedX*direction)
     }
-    setTimeout(handleBubble, 32)
+    setTimeout(handleBubble, 32) // ~ 30fps
     
     function changeDirection() {
         if (direction < 0) {
@@ -49,6 +49,8 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
 
     // Ball's alivestatus
     const [removed, setRemoved] = useState(false)
+    const [gotPoint, setGotPoint] = useState(false)
+
 
     // Popanimations duration in millis
     const animDuration = 200
@@ -80,6 +82,13 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
  
     // Remove ball by returning nothing
     if (removed || yState < 0) {
+        if (yState > 0 && !gotPoint) {
+            setGotPoint(true)
+            // Give point
+            game.score = game.score + 1
+            // Log score for now (strictmode causes dublicate score)
+            console.log(game.score)
+        }
         return <></>
     }
 
@@ -90,11 +99,6 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
 
         // Set timer to remove component right after animation is played
         setTimeout(() => setRemoved(true), animDuration)
-
-        // Give point
-        game.score = game.score + 1
-        // Log score for now (strictmode causes dublicate score)
-        console.log(game.score)
 
         return <>
             <PopAnimation />

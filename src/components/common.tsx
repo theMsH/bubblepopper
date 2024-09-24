@@ -2,15 +2,16 @@ import styled from "styled-components";
 import { theme } from "../assets/theme";
 
 export const Layout = styled.div`
-  background-color: #2383ff;
+  background: linear-gradient(0deg,rgba(2,0,36,1) 0%, rgba(9,9,121,1) 11%, rgba(0,212,255,1) 100%);
   width: 100vw;
   height: 100dvh;
   font-family: ${theme.fontFamily};
+  user-select: none;
 `
 export const Navigation = styled.div`
   width: 100%;
   height: ${theme.navigationHeight};
-  background-color: #d6ecff;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, #fffef5 37%, #b3eefa 77%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,7 +19,7 @@ export const Navigation = styled.div`
 `
 export const HomeButton = styled.button`
   margin-left: 10px;
-  background-color: #00c3ff;
+  background: ${theme.buttonGradient};
   width: 50px;
   height: 50px;
   border: none;
@@ -27,10 +28,9 @@ export const HomeButton = styled.button`
 export const Points = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #00c3ff;
+  background: ${theme.buttonGradient};
   margin-right: 10px;
   border-radius: 50%;
   text-align: center;
   align-content: center;
-
 `

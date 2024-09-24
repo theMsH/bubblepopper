@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Game } from './pages/Game.tsx'
+import GameManager from './components/GameManager.tsx'
 
 
 const router = createBrowserRouter([
@@ -13,12 +13,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/game",
-    element: <Game></Game>
+    element: <GameManager></GameManager>
   }
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RouterProvider router={router}></RouterProvider>
-  </StrictMode>,
+  </StrictMode>
 )

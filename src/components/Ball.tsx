@@ -1,24 +1,55 @@
 import { useState, CSSProperties } from "react"
 import { PopAnimation } from "./animations"
+import { useGameContext } from "./context"
 
 
 interface BallProps {
     maxCount: number
     x: number
     y: number
+    speedX: number
+    speedY: number
 }
 
-export function Ball({ maxCount, x, y }: BallProps) {
+export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
 
-    // Create reacthook for clicking the ball
+    // Get gamecontext to keep track of score
+    const game = useGameContext()
+
+    // To make game more interesting
+    // raise bubble slowly and make it wiggle around a bit
+    const [yState, setY] = useState(y)
+    const [xState, setX] = useState(x)
+    const [direction, setDirection] = useState(-1)
+
+    function handleBubble() {
+        setY(yState-speedY)
+        setX(xState+speedX*direction)
+    }
+    setTimeout(handleBubble, 32)
+    
+    function changeDirection() {
+        if (direction < 0) {
+            setDirection(1)
+        }
+        else setDirection(-1)
+    }
+    setTimeout(changeDirection, 3000)
+   
+
+    // Create hook for clicking the ball
     const [clicked, setClicked] = useState(0)
 
     // Init defaultsize based on randomly generated maxCount
     const defaultSize = (9-maxCount)*10 + 40
-    // Adjust ballsize depending on registered clicks. This will create feeling when the ball is about to pop
+
+    // Adjust ballsize depending on registered clicks. 
+    // This will create feeling when the ball is about to pop
     const ballSize = defaultSize + clicked*10
-    // Ball's status reacthook
+
+    // Ball's alivestatus
     const [removed, setRemoved] = useState(false)
+
     // Popanimations duration in millis
     const animDuration = 200
     
@@ -35,7 +66,7 @@ export function Ball({ maxCount, x, y }: BallProps) {
         userSelect: "none",
         cursor: "pointer",
         // Adjust position accordingly it's dynamic size
-        transform: `translate(${x-ballSize/2}px,${y-ballSize/2}px)`, 
+        transform: `translate(${xState-ballSize/2}px,${yState-ballSize/2}px)`, 
         animationName: "popAnim",
         animationIterationCount: "1",
         animationDuration: animDuration + "ms",
@@ -46,24 +77,35 @@ export function Ball({ maxCount, x, y }: BallProps) {
         fontSize: "25px",
         color: "#00000000"
     }
+ 
+    // Remove ball by returning nothing
+    if (removed || yState < 0) {
+        return <></>
+    }
 
-    if (clicked >= maxCount) {
+    if (clicked == maxCount) {
         // Start ball's pop animation when maxCount reached to give user satisfying pop effect
         style.animationPlayState = "running"
         style.color = "#00000050"
 
         // Set timer to remove component right after animation is played
         setTimeout(() => setRemoved(true), animDuration)
-    }
 
-    // Remove ball by returning nothing
-    if (removed) {
-        return <></>
-    }
+        // Give point
+        game.score = game.score + 1
+        // Log score for now (strictmode causes dublicate score)
+        console.log(game.score)
 
-    return <>
-        <PopAnimation />
-        <div style={style} onClick={() => setClicked(clicked + 1)}>POP
-        </div>
+        return <>
+            <PopAnimation />
+            <div style={style}>POP
+            </div>
+        </>
+    }
+    else {
+        return <>
+        <div style={style} onClick={() => setClicked(clicked + 1)}>POP</div>
     </>
+    }
+  
 }

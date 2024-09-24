@@ -4,7 +4,7 @@ import { HomeButton, Layout, Navigation } from "./components/common";
 
 
 export default function App() {
-
+  
   const [nickname, setNickname] = useState("")
 
   return <Layout>

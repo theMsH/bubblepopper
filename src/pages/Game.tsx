@@ -14,7 +14,7 @@ export function Game() {
             Kuplat nousevat pintaan ja ne täytyy ehtiä klikutella, jotta niistä saisi pisteen.
             Jokaisella klikkauksella pallo laajenee hieman, luoden fiiliksen jäljellä olevista klikkausten määristä
             Kuplalle loin animaatiokomponentin, joka aktivoituu pallon hajotessa.
-            Lisäksi kuplan sisällä voi olla kolikko, joka tuo lisää pisteitä. Kolikko on Lottie kirjaston animaatio, jota käytetään Ball.tsx
+            Lisäksi kuplan sisällä voi olla kolikko, joka tuo lisää pisteitä. Kolikko on json objekti, jota käytetään Ball.tsx Lottie kirjaston avulla
             Lottiesta on hyötyä käyttäjäkokemuksen parantamiseen, koska sillä voidaan tehdä pelistä vielä enemmän mielenkiintoisempi
         
         Kehittäjäkokemuksen parannukset:
@@ -25,6 +25,11 @@ export function Game() {
             Lisäksi refaktoroin ball komponentin omaan tiedostoon.
             Teemalle loin oman tiedoston, josta uskoisin olevan apua myöhemmässä vaiheessa
             Lottien avulla on helppo luoda komponentteja, joilla on monimutkainen animaatio.
+
+        Lottien dokumentaatio ja kolikkoanimaation linkki:
+        https://lottiereact.com/components/Lottie#getting-started
+        https://app.lottiefiles.com/animation/c243523a-e48f-47c1-b811-1ff4cbabd7d6?channel=web&source=public-animation&panel=download
+
     */
   
 

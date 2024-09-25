@@ -27,6 +27,9 @@ export const HomeButton = styled.button`
   box-shadow: 0 0 25px #d0ff00;
   border: 3px solid rgb(242, 255, 0);
 `
+
+export const PlayButton = HomeButton
+
 export const Points = styled.div`
   width: 50px;
   height: 50px;

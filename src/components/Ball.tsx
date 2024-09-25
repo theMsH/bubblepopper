@@ -1,6 +1,8 @@
 import { useState, CSSProperties } from "react"
 import { PopAnimation } from "./animations"
 import { useGameContext } from "./context"
+import Lottie from "lottie-react"
+import coinAnimData from "../assets/coin.json"
 
 
 interface BallProps {
@@ -9,9 +11,17 @@ interface BallProps {
     y: number
     speedX: number
     speedY: number
+    hasCoin: boolean
 }
 
-export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
+export function Ball({ maxCount, x, y, speedX, speedY, hasCoin }: BallProps) {
+    // Value is 1 by default. If has coin inside, its 5
+    let bubbleValue = 1
+    let message = "POP"
+    if (hasCoin) {
+        bubbleValue = 5
+        message = "JACKPOT"
+    }
 
     // Get gamecontext to keep track of score
     const game = useGameContext()
@@ -77,6 +87,7 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
         boxShadow: `0 0 ${ballSize/2}px #d7faff7a inset`,
         border: "3px solid rgba(181, 242, 253, 0.582)",
         fontSize: "25px",
+        fontWeight: "bolder",
         color: "#00000000"
     }
  
@@ -85,7 +96,7 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
         if (yState > 0 && !gotPoint) {
             setGotPoint(true)
             // Give point
-            game.score = game.score + 1
+            game.score = game.score + bubbleValue
             // Log score for now (strictmode causes dublicate score)
             console.log(game.score)
         }
@@ -95,21 +106,25 @@ export function Ball({ maxCount, x, y, speedX, speedY }: BallProps) {
     if (clicked == maxCount) {
         // Start ball's pop animation when maxCount reached to give user satisfying pop effect
         style.animationPlayState = "running"
-        style.color = "#00000050"
+        style.color = "#ffffff4e"
 
         // Set timer to remove component right after animation is played
         setTimeout(() => setRemoved(true), animDuration)
 
         return <>
             <PopAnimation />
-            <div style={style}>POP
-            </div>
+            <div style={style}>{message}</div>
         </>
     }
     else {
-        return <>
-        <div style={style} onClick={() => setClicked(clicked + 1)}>POP</div>
-    </>
+        // Return with coin object if ball has coin
+        if (hasCoin) {
+            return <div style={style} onClick={() => setClicked(clicked + 1)}>
+                <Lottie animationData={coinAnimData}></Lottie>
+            </div>
+        }
+        else {
+            return <div style={style} onClick={() => setClicked(clicked + 1)}></div>
+        }
     }
-  
 }

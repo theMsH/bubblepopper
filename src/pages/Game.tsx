@@ -1,10 +1,32 @@
 import { HomeButton, Layout, Navigation, Points } from "../components/common"
 import { theme} from "../assets/theme"
 import { Ball } from "../components/Ball"
-import { randomInteger } from "../util/randomInteger"
+import { randomInteger, randomizeCoin } from "../util/randomizer"
 
 
 export function Game() {
+
+    /*
+        Tehtävän kommentointiosuus 25.9.2024
+
+        Käyttäjäkokemus parannukset:
+            Halusin tehdä pelistä mielenkiintoisemman luomalla meriteeman, jossa pallot ovatkin kuplia.
+            Kuplat nousevat pintaan ja ne täytyy ehtiä klikutella, jotta niistä saisi pisteen.
+            Jokaisella klikkauksella pallo laajenee hieman, luoden fiiliksen jäljellä olevista klikkausten määristä
+            Kuplalle loin animaatiokomponentin, joka aktivoituu pallon hajotessa.
+            Lisäksi kuplan sisällä voi olla kolikko, joka tuo lisää pisteitä. Kolikko on Lottie kirjaston animaatio, jota käytetään Ball.tsx
+            Lottiesta on hyötyä käyttäjäkokemuksen parantamiseen, koska sillä voidaan tehdä pelistä vielä enemmän mielenkiintoisempi
+        
+        Kehittäjäkokemuksen parannukset:
+            Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee 
+            käsiksi joka paikasta käyttämällä customhookkia "useGameContext()", 
+            jollon sitä tietoa ei tarvitse välitellä edestakaisin komponenttien välillä.
+            Sinne voisi tulevaisuudessa lisätä esim käyttäjän, vaikeustason, ajan yms.
+            Lisäksi refaktoroin ball komponentin omaan tiedostoon.
+            Teemalle loin oman tiedoston, josta uskoisin olevan apua myöhemmässä vaiheessa
+            Lottien avulla on helppo luoda komponentteja, joilla on monimutkainen animaatio.
+    */
+  
 
     // MaxBallsize is basically 130px. This formula is used when calculating bigger size in Ball component
     const maxBallSize = (9-0)*10+40
@@ -27,18 +49,16 @@ export function Game() {
             y={randomInteger(maxBallSize/2 + startingDepth, window.innerHeight-maxBallSize/2 - navHeight + startingDepth*2)}
             speedX={randomInteger(0,5)*0.03}
             speedY={randomInteger(3,5)*0.3}
+            hasCoin={randomizeCoin()}
             >
             </Ball>
     })
 
-    return <>
-            <Layout>
-                <Navigation>
-                    <HomeButton>Quit</HomeButton>
-                    <Points>0</Points>
-                </Navigation>
-                {allBalls}
-                {}
-            </Layout>
-        </>
+    return <Layout>
+        <Navigation>
+            <HomeButton onClick={() => {window.location.href = "/"}}>Quit</HomeButton>
+            <Points></Points>
+        </Navigation>
+        {allBalls}
+    </Layout>
 }

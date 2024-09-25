@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { addPointsToDb } from "./services/supabase_clients";
-import { HomeButton, Layout, Navigation } from "./components/common";
-
+import { PlayButton, Layout, Navigation } from "./components/common";
 
 export default function App() {
-  
+
   const [nickname, setNickname] = useState("")
 
   return <Layout>
     <Navigation>
-      <HomeButton>Home</HomeButton>
+      <PlayButton onClick={() => { window.location.href = "/game" }}>Play</PlayButton>
     </Navigation>
 
     <input value={nickname} onChange={(e) => setNickname(e.target.value)}></input>

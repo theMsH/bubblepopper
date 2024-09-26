@@ -3,7 +3,7 @@ Tästä repositoriosta löytyy koodi tehtäväsarja 2 tehtäviin.
 (This repository is used in my dev studies)
 
 ## Setup project
-- Install Node.js to your device https://nodejs.org/en
+- Install [Node.js](https://nodejs.org/en) to your device 
 
 - Clone this repository to your preferred destination.
 

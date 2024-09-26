@@ -1,11 +1,11 @@
 import { useState, CSSProperties } from "react"
 import { PopAnimation } from "./animations"
-import { useGameContext } from "./context"
+import { useGameContext } from "../hooks/context"
 import Lottie from "lottie-react"
 import coinAnimData from "../assets/coin.json"
 
 
-interface BallProps {
+interface BubbleProps {
     maxCount: number
     x: number
     y: number
@@ -14,20 +14,18 @@ interface BallProps {
     hasCoin: boolean
 }
 
-export function Ball({ maxCount, x, y, speedX, speedY, hasCoin }: BallProps) {
-    // Value is 1 by default. If has coin inside, its 5
-    let bubbleValue = 1
-    let message = "POP"
-    if (hasCoin) {
-        bubbleValue = 5
-        message = "JACKPOT"
-    }
+
+export function Bubble({ maxCount, x, y, speedX, speedY, hasCoin }: BubbleProps) {
 
     // Get gamecontext to keep track of score
     const game = useGameContext()
 
-    // To make game more interesting
-    // raise bubble slowly and make it wiggle around a bit
+    // To make game more interesting:
+    // Bubble has more value if there is coin inside
+    // Raise bubble slowly and make it wiggle around a bit
+    const bubbleValue = hasCoin ? 5 : 1
+    const message = hasCoin ? "JACKPOP" : "POP"
+
     const [yState, setY] = useState(y)
     const [xState, setX] = useState(x)
     const [direction, setDirection] = useState(-1)
@@ -45,31 +43,26 @@ export function Ball({ maxCount, x, y, speedX, speedY, hasCoin }: BallProps) {
         else setDirection(-1)
     }
     setTimeout(changeDirection, 3000)
-   
 
-    // Create hook for clicking the ball
-    const [clicked, setClicked] = useState(0)
-
+    
     // Init defaultsize based on randomly generated maxCount
-    const defaultSize = (9-maxCount)*10 + 40
-
-    // Adjust ballsize depending on registered clicks. 
+    // Adjust size depending on registered clicks. 
     // This will create feeling when the ball is about to pop
-    const ballSize = defaultSize + clicked*10
+    const [clicked, setClicked] = useState(0)
+    const defaultSize = (9-maxCount)*10 + 40
+    const size = defaultSize + clicked*10
 
-    // Ball's alivestatus
-    const [removed, setRemoved] = useState(false)
+    // Lifecycle variables
+    const scoreBubble = document.querySelector("#score-bubble") as HTMLDivElement
     const [gotPoint, setGotPoint] = useState(false)
-
-
-    // Popanimations duration in millis
+    const [removed, setRemoved] = useState(false)
     const animDuration = 200
     
+
     const style: CSSProperties = {
         background: "#00c3ff7d",
-        // Adjust ballsize
-        width: ballSize + "px",
-        height: ballSize + "px",
+        width: size + "px",
+        height: size + "px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -77,34 +70,36 @@ export function Ball({ maxCount, x, y, speedX, speedY, hasCoin }: BallProps) {
         position: "absolute",
         userSelect: "none",
         cursor: "pointer",
-        // Adjust position accordingly it's dynamic size
-        transform: `translate(${xState-ballSize/2}px,${yState-ballSize/2}px)`, 
+        transform: `translate(${xState-size/2}px,${yState-size/2}px)`,      // Adjust position accordingly it's dynamic size
         animationName: "popAnim",
         animationIterationCount: "1",
         animationDuration: animDuration + "ms",
         animationFillMode: "forwards",
         animationPlayState: "paused",
-        boxShadow: `0 0 ${ballSize/2}px #d7faff7a inset`,
+        boxShadow: `0 0 ${size/2}px #d7faff7a inset`,
         border: "3px solid rgba(181, 242, 253, 0.582)",
         fontSize: "25px",
         fontWeight: "bolder",
-        color: "#00000000"
-    }
- 
-    // Remove ball by returning nothing
-    if (removed || yState < 0) {
-        if (yState > 0 && !gotPoint) {
-            setGotPoint(true)
-            // Give point
-            game.score = game.score + bubbleValue
-            // Log score for now (strictmode causes dublicate score)
-            console.log(game.score)
-        }
-        return <></>
+        color: "#00000000",
+        transition: "width 0.2s cubic-bezier(0, -2, 0, 2), height 0.2s cubic-bezier(0, -2, 0, 2)"     // Smooth growth
     }
 
-    if (clicked == maxCount) {
-        // Start ball's pop animation when maxCount reached to give user satisfying pop effect
+    // Remove ball by returning nothing
+    if (removed || yState < 0) {
+
+        // Give point if bubble is underwater
+        if (yState > 0 && !gotPoint) {
+            setGotPoint(true)
+            game.score = game.score + bubbleValue
+            // Update value
+            scoreBubble.innerText = `${game.score}`
+        }
+        
+        return
+    }
+
+    // Start ball's pop animation when maxCount reached to give user satisfying pop effect
+    if (clicked === maxCount) {
         style.animationPlayState = "running"
         style.color = "#ffffff4e"
 
@@ -117,14 +112,9 @@ export function Ball({ maxCount, x, y, speedX, speedY, hasCoin }: BallProps) {
         </>
     }
     else {
-        // Return with coin object if ball has coin
-        if (hasCoin) {
-            return <div style={style} onClick={() => setClicked(clicked + 1)}>
-                <Lottie animationData={coinAnimData}></Lottie>
-            </div>
-        }
-        else {
-            return <div style={style} onClick={() => setClicked(clicked + 1)}></div>
-        }
+        // Return with coin object if hasCoin
+        return <div style={style} onClick={() => setClicked(clicked + 1)}>
+            {hasCoin ? <Lottie animationData={coinAnimData}></Lottie> : null}
+        </div> 
     }
 }

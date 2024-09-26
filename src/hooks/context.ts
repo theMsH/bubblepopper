@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
-import { GameManagerProps } from "./GameManager";
-
+import { GameManagerProps } from "../components/GameManager";
 
 
 // Create gamecontext which should be type of GameManager

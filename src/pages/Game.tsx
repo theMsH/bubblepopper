@@ -1,13 +1,14 @@
-import { HomeButton, Layout, Navigation, Points } from "../components/common"
+import { HomeButton, Layout, Navigation } from "../components/common"
 import { theme} from "../assets/theme"
-import { Ball } from "../components/Ball"
+import { Bubble } from "../components/Bubble"
 import { randomInteger, randomizeCoin } from "../util/randomizer"
+import ScoreBubble from "../components/ScoreBubble"
 
 
 export function Game() {
 
     /*
-        Tehtävän kommentointiosuus 25.9.2024
+        Tehtävän kommentointiosuus 26.9.2024
 
         Käyttäjäkokemus parannukset:
             Halusin tehdä pelistä mielenkiintoisemman luomalla meriteeman, jossa pallot ovatkin kuplia.
@@ -18,11 +19,11 @@ export function Game() {
             Lottiesta on hyötyä käyttäjäkokemuksen parantamiseen, koska sillä voidaan tehdä pelistä vielä enemmän mielenkiintoisempi
         
         Kehittäjäkokemuksen parannukset:
-            Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee 
-            käsiksi joka paikasta käyttämällä customhookkia "useGameContext()", 
+            Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee käsittääkseni
+            käsiksi joka paikasta käyttämällä customhookkia "useGameContext()" (löytyy context.ts),
             jollon sitä tietoa ei tarvitse välitellä edestakaisin komponenttien välillä.
-            Sinne voisi tulevaisuudessa lisätä esim käyttäjän, vaikeustason, ajan yms.
-            Lisäksi refaktoroin ball komponentin omaan tiedostoon.
+            Sinne voisi tulevaisuudessa lisätä esim käyttäjän, vaikeustason, ajan tms. ellei sitten localStoragen käyttö ole parempi ratkaisu.
+            Lisäksi refaktoroin ball komponentin omaan tiedostoon bubble nimellä.
             Teemalle loin oman tiedoston, josta uskoisin olevan apua myöhemmässä vaiheessa
             Lottien avulla on helppo luoda komponentteja, joilla on monimutkainen animaatio.
 
@@ -31,7 +32,6 @@ export function Game() {
         https://app.lottiefiles.com/animation/c243523a-e48f-47c1-b811-1ff4cbabd7d6?channel=web&source=public-animation&panel=download
 
     */
-  
 
     // MaxBallsize is basically 130px. This formula is used when calculating bigger size in Ball component
     const maxBallSize = (9-0)*10+40
@@ -44,7 +44,7 @@ export function Game() {
     const startingDepth = 200
 
     const allBalls = Array(25).fill(null).map((_, i) => {
-        return <Ball
+        return <Bubble
             key={i}
             maxCount={randomInteger(1, maxClicks)}
             // Limit x, y values to fit in the window all times
@@ -56,13 +56,13 @@ export function Game() {
             speedY={randomInteger(3,5)*0.3}
             hasCoin={randomizeCoin()}
             >
-            </Ball>
+            </Bubble>
     })
 
     return <Layout>
         <Navigation>
             <HomeButton onClick={() => {window.location.href = "/"}}>Quit</HomeButton>
-            <Points></Points>
+            <ScoreBubble/>
         </Navigation>
         {allBalls}
     </Layout>

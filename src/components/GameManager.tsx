@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Game } from "../pages/Game"
-import { GameContext } from "./context"
+import { GameContext } from "../hooks/context"
 
 
 export interface GameManagerProps {

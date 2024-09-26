@@ -29,15 +29,3 @@ export const HomeButton = styled.button`
 `
 
 export const PlayButton = HomeButton
-
-export const Points = styled.div`
-  width: 50px;
-  height: 50px;
-  background: #00aeff4e;
-  margin-right: 10px;
-  border-radius: 50%;
-  text-align: center;
-  align-content: center;
-  box-shadow: 0 0 25px #effdff inset;
-  border: 3px solid rgba(255, 255, 255, 0.63);
-`

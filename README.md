@@ -7,7 +7,7 @@ Tästä repositoriosta löytyy koodi tehtäväsarja 2 tehtäviin.
 
 - Clone this repository to your preferred destination.
 
-- Navigate to projectfolder in terminal or open it in Visual Studio Code's terminal
+- Navigate into projects root folder in terminal or open it in [Visual Studio Code](https://code.visualstudio.com/)'s terminal
 - Install [packages](/package.json) used in the project:
 ```
 npm install

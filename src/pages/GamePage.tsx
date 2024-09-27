@@ -4,6 +4,7 @@ import { Bubble } from "../components/Bubble"
 import { randomInteger, randomizeCoin } from "../util/randomizer"
 import ScoreBubble from "../components/ScoreBubble"
 import HomeIcon from '@mui/icons-material/Home';
+import { Link } from "react-router-dom"
 
 
 export function GamePage() {
@@ -66,7 +67,7 @@ export function GamePage() {
 
     return <Layout>
         <Navigation>
-            <HomeButton onClick={() => {window.location.href = "/"}}><HomeIcon/></HomeButton>
+            <Link to="/"><HomeButton><HomeIcon/></HomeButton></Link>
             <ScoreBubble/>
         </Navigation>
         {allBalls}

@@ -4,6 +4,7 @@ import { addPointsToDb } from "../services/supabase_clients";
 import ScoreBubble from "../components/ScoreBubble";
 import { useGame } from "../components/GameProvider";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function HomePage() {
@@ -18,7 +19,7 @@ export default function HomePage() {
 
   return <Layout>
     <Navigation>
-      <PlayButton onClick={() => { window.location.href = "/game" }}><PlayArrowIcon/></PlayButton>
+      <Link to="/game"><PlayButton><PlayArrowIcon/></PlayButton></Link>
       <ScoreBubble></ScoreBubble>
     </Navigation>
 

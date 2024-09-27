@@ -42,6 +42,9 @@ export function GamePage() {
 
     const game = useGame()
 
+    // Init score as the new game has begun
+    game.score = 0
+
     // MaxBallsize is basically 130px. This formula is used when calculating bigger size in Ball component
     const maxBallSize = (9-0)*10+40
     const maxClicks = 10

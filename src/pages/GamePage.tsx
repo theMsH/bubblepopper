@@ -5,6 +5,7 @@ import { randomInteger, randomizeCoin } from "../util/randomizer"
 import ScoreBubble from "../components/ScoreBubble"
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from "react-router-dom"
+import { useGame } from "../components/GameProvider"
 
 
 export function GamePage() {
@@ -23,11 +24,10 @@ export function GamePage() {
 
         
         Kehittäjäkokemuksen parannukset:
-          - Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee käsittääkseni
+          - Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee
                käsiksi joka paikasta käyttämällä customhookkia "useGame()" (löytyy GameProvider.tsx),
                jollon sitä tietoa ei tarvitse välitellä edestakaisin komponenttien välillä. 
-               Tai näin ainakin kuvittelin, vaikuttaa siltä että tuo tekniikka on tarkoitettu johonkin muuhun, esim autorisointiin tai teemaan
-               Tiedot katoaa sivun vaihdon yhteydessä, eli varmaan pitäisi tehdä joku init joka hakee ne local storagesta
+               Tiedot kuitenkin katoaa sivun refreshauksen yhteydessä, eli varmaan pitäisi tehdä joku init joka hakee ne localstoragesta
           - Refaktoroin ball komponentin omaan tiedostoon bubble nimellä.
           - Lottien avulla on helppo luoda komponentteja, joilla on monimutkainen animaatio.
 
@@ -39,6 +39,8 @@ export function GamePage() {
         https://mui.com/material-ui/material-icons/
 
     */
+
+    const game = useGame()
 
     // MaxBallsize is basically 130px. This formula is used when calculating bigger size in Ball component
     const maxBallSize = (9-0)*10+40
@@ -69,8 +71,10 @@ export function GamePage() {
     return <Layout>
         <Navigation>
             <Link to="/"><HomeButton><HomeIcon/></HomeButton></Link>
+            <p>You are playing as: {game.nickname}</p>
             <ScoreBubble/>
         </Navigation>
         {allBalls}
+
     </Layout>
 }

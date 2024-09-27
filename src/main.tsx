@@ -5,12 +5,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import { GamePage } from './pages/GamePage'
 import GameProvider from './components/GameProvider'
+import NotFoundPage from './pages/NotFoundPage'
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage/>
+    element: <HomePage/>,
+    errorElement: <NotFoundPage/>
   },
   {
     path: "/game",

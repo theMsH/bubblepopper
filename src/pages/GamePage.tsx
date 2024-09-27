@@ -6,29 +6,28 @@ import ScoreBubble from "../components/ScoreBubble"
 import HomeIcon from '@mui/icons-material/Home';
 
 
-export function Game() {
-
+export function GamePage() {
     /*
-        Tehtävän kommentointiosuus 26.9.2024
+        Tehtävän kommentointiosuus 28.9.2024
 
         Käyttäjäkokemus parannukset:
-            Halusin tehdä pelistä mielenkiintoisemman luomalla meriteeman, jossa pallot ovatkin kuplia.
-            Kuplat nousevat pintaan ja ne täytyy ehtiä klikutella, jotta niistä saisi pisteen.
-            Jokaisella klikkauksella pallo laajenee hieman, luoden fiiliksen jäljellä olevista klikkausten määristä
-            Kuplalle loin animaatiokomponentin, joka aktivoituu pallon hajotessa.
-            Lisäksi kuplan sisällä voi olla kolikko, joka tuo lisää pisteitä. Kolikko on json objekti, jota käytetään Ball.tsx Lottie kirjaston avulla
-            Lottiesta on hyötyä käyttäjäkokemuksen parantamiseen, koska sillä voidaan tehdä pelistä vielä enemmän mielenkiintoisempi
-            Materialicons kirjastosta on aina hyötyä
+          - Halusin tehdä pelistä mielenkiintoisemman luomalla meriteeman, jossa pallot ovatkin kuplia.
+                Kuplat nousevat pintaan ja ne täytyy ehtiä klikutella, jotta niistä saisi pisteen.
+                Jokaisella klikkauksella pallo laajenee hieman, luoden fiiliksen jäljellä olevista klikkausten määristä
+          - Kuplalle loin animaatiokomponentin, joka aktivoidaan pallon hajotessa.
+          - Lisäksi kuplan sisällä voi olla kolikko, joka tuo lisää pisteitä. Kolikko on .json objekti, jota käytetään Bubble.tsx Lottie kirjaston avulla
+          - Lottiesta on hyötyä käyttäjäkokemuksen parantamiseen, koska sillä voidaan tehdä pelistä vielä enemmän mielenkiintoisempi
+          - Materialicons kirjastosta on aina hyötyä -> vähentää tekstiä -> vähentää lokalisointia
 
         
         Kehittäjäkokemuksen parannukset:
-            Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee käsittääkseni
-            käsiksi joka paikasta käyttämällä customhookkia "useGameContext()" (löytyy context.ts),
-            jollon sitä tietoa ei tarvitse välitellä edestakaisin komponenttien välillä.
-            Sinne voisi tulevaisuudessa lisätä esim käyttäjän, vaikeustason, ajan tms. ellei sitten localStoragen käyttö ole parempi ratkaisu.
-            Lisäksi refaktoroin ball komponentin omaan tiedostoon bubble nimellä.
-            Teemalle loin oman tiedoston, josta uskoisin olevan apua myöhemmässä vaiheessa
-            Lottien avulla on helppo luoda komponentteja, joilla on monimutkainen animaatio.
+          - Loin pelikontekstin, joka ylläpitää pisteytystä. Tämän avulla pisteisiin pääsee käsittääkseni
+               käsiksi joka paikasta käyttämällä customhookkia "useGame()" (löytyy GameProvider.tsx),
+               jollon sitä tietoa ei tarvitse välitellä edestakaisin komponenttien välillä. 
+               Tai näin ainakin kuvittelin, vaikuttaa siltä että tuo tekniikka on tarkoitettu johonkin muuhun, esim autorisointiin tai teemaan
+               Tiedot katoaa sivun vaihdon yhteydessä, eli varmaan pitäisi tehdä joku init joka hakee ne local storagesta
+          - Refaktoroin ball komponentin omaan tiedostoon bubble nimellä.
+          - Lottien avulla on helppo luoda komponentteja, joilla on monimutkainen animaatio.
 
         Lottien dokumentaatio ja kolikkoanimaation linkki:
         https://lottiereact.com/components/Lottie#getting-started

@@ -1,9 +1,9 @@
-import { useGameContext } from "../hooks/context"
+import { useGame } from "./GameProvider"
 import { CSSProperties } from "styled-components"
 
 
 export default function ScoreBubble() {
-    const game = useGameContext()
+    const game = useGame()
 
     const style: CSSProperties = {
         width: "50px",
@@ -16,7 +16,7 @@ export default function ScoreBubble() {
         boxShadow: "0 0 25px #effdff inset",
         border: "3px solid rgba(255, 255, 255, 0.63)"
     }
-    
+
     return <div id="score-bubble" style={style}>
         {game.score}
     </div>

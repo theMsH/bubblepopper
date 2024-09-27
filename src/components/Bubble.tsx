@@ -1,6 +1,6 @@
 import { useState, CSSProperties } from "react"
 import { PopAnimation } from "./animations"
-import { useGameContext } from "../hooks/context"
+import { useGame } from "./GameProvider"
 import Lottie from "lottie-react"
 import coinAnimData from "../assets/coin.json"
 
@@ -18,7 +18,7 @@ interface BubbleProps {
 export function Bubble({ maxCount, x, y, speedX, speedY, hasCoin }: BubbleProps) {
 
     // Get gamecontext to keep track of score
-    const game = useGameContext()
+    const game = useGame()
 
     // To make game more interesting:
     // Bubble has more value if there is coin inside

@@ -3,12 +3,12 @@ Tästä repositoriosta löytyy koodi tehtäväsarja 2 tehtäviin.
 (This repository is used in my dev studies)
 
 ## Setup project
-- Install Node.js to your device https://nodejs.org/en
+- Install [Node.js](https://nodejs.org/en) to your device 
 
 - Clone this repository to your preferred destination.
 
-- Navigate to projectfolder in terminal or open it in Visual Studio Code's terminal
-- Install packages used in the project:
+- Navigate into projects root folder in terminal or open it in [Visual Studio Code](https://code.visualstudio.com/)'s terminal
+- Install [packages](/package.json) used in the project:
 ```
 npm install
 ```

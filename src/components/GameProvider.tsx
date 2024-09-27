@@ -1,12 +1,12 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
+
 type GameProviderProps = PropsWithChildren & {
     score: number
     nickname: string
 }
 
 export const GameContext = createContext<GameProviderProps | undefined>(undefined)
-
 
 export default function GameProvider({
     children
@@ -17,13 +17,13 @@ export default function GameProvider({
         nickname: ""
     });
 
+    // Return GameContext with the child pages inside. This allows us to use gamecontext in multiple pages
     return <GameContext.Provider value={game}>{children}</GameContext.Provider>
 }
 
-// Custom hook to get the gamecontext
+// Custom hook to get the gamecontext from everywhere
 export function useGame() {
 
-    // Init game to use GameContext
     const context = useContext(GameContext)
 
     // If used outside GameContext, throw error

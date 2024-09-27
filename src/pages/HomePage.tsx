@@ -1,4 +1,4 @@
-import { PlayButton, Layout, Navigation } from "../components/common";
+import { PlayButton, Layout, Navigation } from "../assets/css/common";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { addPointsToDb } from "../services/supabase_clients";
 import ScoreBubble from "../components/ScoreBubble";

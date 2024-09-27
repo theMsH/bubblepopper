@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { HomeButton, Layout, Navigation } from "../components/common";
+import { HomeButton, Layout, Navigation } from "../assets/css/common";
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from "react-router-dom";
 

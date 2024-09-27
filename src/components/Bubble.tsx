@@ -1,8 +1,8 @@
 import { useState, CSSProperties } from "react"
-import { PopAnimation } from "./animations"
+import { PopAnimation } from "../assets/css/animations"
 import { useGame } from "./GameProvider"
 import Lottie from "lottie-react"
-import coinAnimData from "../assets/coin.json"
+import coinAnimData from "../assets/animations/coin.json"
 
 
 interface BubbleProps {

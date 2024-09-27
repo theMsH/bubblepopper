@@ -1,5 +1,5 @@
-import { HomeButton, Layout, Navigation } from "../components/common"
-import { theme} from "../assets/theme"
+import { HomeButton, Layout, Navigation } from "../assets/css/common"
+import { theme} from "../assets/css/theme"
 import { Bubble } from "../components/Bubble"
 import { randomInteger, randomizeCoin } from "../util/randomizer"
 import ScoreBubble from "../components/ScoreBubble"

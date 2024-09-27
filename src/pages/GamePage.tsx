@@ -19,6 +19,7 @@ export function GamePage() {
           - Lisäksi kuplan sisällä voi olla kolikko, joka tuo lisää pisteitä. Kolikko on .json objekti, jota käytetään Bubble.tsx Lottie kirjaston avulla
           - Lottiesta on hyötyä käyttäjäkokemuksen parantamiseen, koska sillä voidaan tehdä pelistä vielä enemmän mielenkiintoisempi
           - Materialicons kirjastosta on aina hyötyä -> vähentää tekstiä -> vähentää lokalisointia
+          - 404 page: käyttäjälle tehdään selväksi, ettei kuulu olla kyseisellä routella, tarjotaan nappula takaisin homepageen
 
         
         Kehittäjäkokemuksen parannukset:

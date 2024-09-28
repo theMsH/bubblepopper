@@ -7,7 +7,7 @@ import { GamePage } from './pages/GamePage'
 import GameProvider from './components/GameProvider'
 import NotFoundPage from './pages/NotFoundPage'
 
-
+// If user navigates any other endpoint than defined in router, it will land in 404 error page
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,11 +15,13 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage/>
   },
   {
-    path: "/game",
+    path: "/play",
     element: <GamePage/>
   }
 ])
 
+// Strictmode casuses two renders, so score will be dublicated
+// GameProvider is created here and router, which handles all the pages that will be rendered inside it.
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider score={0} nickname={""}>

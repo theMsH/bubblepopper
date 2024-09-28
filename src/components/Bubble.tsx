@@ -30,12 +30,20 @@ export function Bubble({ maxCount, x, y, speedX, speedY, hasCoin }: BubbleProps)
     const [xState, setX] = useState(x)
     const [direction, setDirection] = useState(-1)
 
+
+    // Render bubble position
     function handleBubble() {
         setY(yState-speedY)
         setX(xState+speedX*direction)
     }
     setTimeout(handleBubble, 32) // ~ 30fps
+
+    /* 
+        Timeout is basically executed infinite times, even after bubble is removed. It will not cause infinite loop error due to 32ms delay
+        This is likely bad way to create raising bubble mechanics, but didn't figure out better way.
+    */
     
+    // This creates some wavyness for bubble
     function changeDirection() {
         if (direction < 0) {
             setDirection(1)
@@ -95,6 +103,7 @@ export function Bubble({ maxCount, x, y, speedX, speedY, hasCoin }: BubbleProps)
             scoreBubble.innerText = `${game.score}`
         }
         
+        // Here we simply return nothing. I need to figure out better way to destroy this component at the end of its lifecycle.
         return
     }
 
@@ -105,7 +114,7 @@ export function Bubble({ maxCount, x, y, speedX, speedY, hasCoin }: BubbleProps)
 
         // Set timer to remove component right after animation is played
         setTimeout(() => setRemoved(true), animDuration)
-
+        
         return <>
             <PopAnimation />
             <div style={style}>{message}</div>

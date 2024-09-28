@@ -12,14 +12,17 @@ export default function HomePage() {
   const game = useGame()
   const [nickname, setNickname] = useState(game.nickname)
 
+  // Render temporary nickname in the site and also save it in gamecontext
   function updateNickname(newNickname:string) {
     setNickname(newNickname)
     game.nickname = newNickname
   }
 
+  // Return react-dom-router's Link component with mui icon library's Play arrow component.
+  // It will basically draw svg icon inside our stylized "PlayButton" div and the whole thing will work as a button
   return <Layout>
     <Navigation>
-      <Link to="/game"><PlayButton><PlayArrowIcon/></PlayButton></Link>
+      <Link to="/play"><PlayButton><PlayArrowIcon/></PlayButton></Link>
       <ScoreBubble></ScoreBubble>
     </Navigation>
 

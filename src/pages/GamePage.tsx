@@ -71,6 +71,8 @@ export function GamePage() {
             </Bubble>
     })
 
+    // Return Homebutton in react-dom-router's Link component, so it doenst refresh the site and will be instantenious. 
+    // This helps gamecontext to remember it's values
     return <Layout>
         <Navigation>
             <Link to="/"><HomeButton><HomeIcon/></HomeButton></Link>
